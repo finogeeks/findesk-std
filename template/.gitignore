@@ -1,0 +1,3 @@
+# Desktop SDK tarballs (obtain from FinDesk / findesk-std; pin integrity in findesk.lock.json)
+artifacts/*.tar.gz
+artifacts/*.sha256
