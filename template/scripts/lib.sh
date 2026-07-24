@@ -187,7 +187,37 @@ fi
 export FINDESK_DIST_REPO="$ROOT"
 export FINDESK_DISTRIBUTION_ID="$DIST_ID"
 export FINDESK_WHITE_LABEL=1
-# Customers must not need findesk-core source; prepared binaries only unless overridden.
-export AIONCORE_PREFER_LOCAL="${AIONCORE_PREFER_LOCAL:-0}"
 PLATFORM="$(resolve_platform)"
 export FINDESK_PLATFORM="$PLATFORM"
+
+# Customers use prepared release binaries. Engineers with a sibling findesk-core
+# release build auto-prefer it so Kimi/Trae LLM injection and other local fixes apply.
+# Keep search layout in sync with:
+# - scripts/findesk/platformLock.ts → resolveSiblingFindeskCoreReleaseBinary
+# - packages/desktop/src/process/backend/binaryResolver.ts → siblingCoreBinaryCandidates
+_resolve_sibling_aioncore() {
+  local base=""
+  if [[ -n "${FINDESK_PLATFORM:-}" && -d "${FINDESK_PLATFORM}" ]]; then
+    base="$(cd "${FINDESK_PLATFORM}/.." && pwd)"
+  else
+    base="$(cd "$ROOT/.." && pwd)"
+  fi
+  local candidate="$base/findesk-core/target/release/aioncore"
+  if [[ -x "$candidate" ]]; then
+    echo "$candidate"
+  fi
+}
+
+_sibling_aioncore="$(_resolve_sibling_aioncore || true)"
+if [[ -z "${AIONCORE_PREFER_LOCAL:-}" ]]; then
+  if [[ -n "$_sibling_aioncore" ]]; then
+    export AIONCORE_PREFER_LOCAL=1
+  else
+    export AIONCORE_PREFER_LOCAL=0
+  fi
+else
+  export AIONCORE_PREFER_LOCAL
+fi
+if [[ -n "$_sibling_aioncore" && -z "${AIONCORE_LOCAL_BINARY:-}" && -z "${AIONUI_BACKEND_BIN:-}" ]]; then
+  export AIONCORE_LOCAL_BINARY="$_sibling_aioncore"
+fi

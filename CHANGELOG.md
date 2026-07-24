@@ -7,6 +7,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.19] - 2026-07-24
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.49-findesk-core.1` (wave 7/8 stack: aionrs 0.2.6,
+  ACP/bootstrap ports).
+- Pin `finclawVersion` → `v0.10.4`.
+- Pin `finsafeVersion` → `v0.9.27`.
+
 ## [2.1.18] - 2026-07-21
 
 ### Fixed

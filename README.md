@@ -64,8 +64,8 @@ you do not need separate product checkouts.
   "schemaVersion": 1,
   "findesk": {
     "package": "findesk-desktop-sdk",
-    "version": "2.1.18",
-    "artifact": "https://github.com/finogeeks/findesk-std/releases/download/v2.1.18/findesk-desktop-sdk-2.1.18.tar.gz",
+    "version": "2.1.19",
+    "artifact": "https://github.com/finogeeks/findesk-std/releases/download/v2.1.19/findesk-desktop-sdk-2.1.19.tar.gz",
     "integrity": "sha256-<64-hex-chars>"
   }
 }
