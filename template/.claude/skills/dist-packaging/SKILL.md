@@ -28,6 +28,14 @@ bun run dist -- --mac --arm64 --pack-only
 bun run dist -- --mac --arm64
 ```
 
+When an `upstream:findesk-std` issue says a newer SDK is available, bump
+`findesk.lock.json` from the release lock snippet, then doctor/materialize again.
+See [docs/upstream-sdk.md](../../../docs/upstream-sdk.md). Local check:
+
+```bash
+bash scripts/watch-findesk-std.sh --dry-run
+```
+
 Scripts set `FINDESK_DIST_REPO` and `FINDESK_WHITE_LABEL=1`. `dist.sh` **materializes
 before** packaging — do not skip that.
 

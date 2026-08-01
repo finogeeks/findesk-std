@@ -38,6 +38,7 @@ bun run dist -- --mac --arm64          # full installer (or --pack-only for smok
 | [docs/packaging.md](docs/packaging.md) | `materialize` / `dist`, signing, installers |
 | [docs/private-plugins.md](docs/private-plugins.md) | Author private plugins under `plugins/` |
 | [docs/local-paths.md](docs/local-paths.md) | Where SDK cache, app, and user data land |
+| [docs/upstream-sdk.md](docs/upstream-sdk.md) | Daily findesk-std watch → upgrade issues |
 
 ## Agent skills (Cursor / Claude)
 
@@ -57,8 +58,9 @@ See [AGENTS.md](AGENTS.md) for routing.
 ├── pack/                 # brand, identity, distribution SKU
 ├── plugins/              # optional @findesk-private/* plugins
 ├── artifacts/            # optional offline SDK tarball
-├── scripts/              # doctor / materialize / start / dist
+├── scripts/              # doctor / materialize / start / dist / watch-findesk-std
 ├── docs/                 # public developer docs
+├── .github/workflows/    # findesk-std upstream watch (daily)
 └── .claude/skills/       # agent skills (Cursor: .cursor/skills → symlink)
 ```
 

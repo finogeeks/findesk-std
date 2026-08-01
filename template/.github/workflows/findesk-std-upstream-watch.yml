@@ -1,0 +1,41 @@
+# Watch public finogeeks/findesk-std releases vs findesk.lock.json.
+# When upstream is newer, open a tracking issue (no auto pin bump).
+#
+# Schedule: daily 02:00 UTC (~10:00 HKT). Manual: workflow_dispatch.
+name: findesk-std upstream watch
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Log only — do not create or comment on issues
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: findesk-std-upstream-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure gh auth
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh auth status
+
+      - name: Compare lock pin to latest findesk-std
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRY_RUN: ${{ inputs.dry_run == true && '1' || '0' }}
+        run: bash scripts/watch-findesk-std.sh

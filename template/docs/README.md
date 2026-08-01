@@ -9,5 +9,6 @@ Public documentation for authors of this white-label FinDesk distribution.
 | [packaging.md](./packaging.md) | Materialize + installer builds |
 | [private-plugins.md](./private-plugins.md) | Private plugins under `plugins/` |
 | [local-paths.md](./local-paths.md) | Cache, app bundle, and runtime data locations |
+| [upstream-sdk.md](./upstream-sdk.md) | Daily findesk-std watch → lock-bump issues |
 
 Agent skills: [../AGENTS.md](../AGENTS.md).

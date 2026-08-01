@@ -7,6 +7,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+### Added
+
+- Distribution template: daily **findesk-std upstream watch** workflow +
+  `scripts/watch-findesk-std.sh` — opens `upstream:findesk-std` issues when the
+  lock pin lags the latest public SDK (no auto bump).
+
 ## [2.1.20] - 2026-08-01
 
 ### Fixed

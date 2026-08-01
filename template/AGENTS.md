@@ -15,6 +15,11 @@ not a sibling FinDesk monorepo.
 | Pin SDK, doctor, materialize, start, dist / installers | [`dist-packaging`](.claude/skills/dist-packaging/SKILL.md) |
 | Add or change a private plugin under `plugins/` | [`dist-private-plugin`](.claude/skills/dist-private-plugin/SKILL.md) |
 
+Upstream: treat [`finogeeks/findesk-std`](https://github.com/finogeeks/findesk-std) as the
+SDK source of truth. Daily Actions workflow opens `upstream:findesk-std` issues when the
+lock is behind — see [docs/upstream-sdk.md](docs/upstream-sdk.md). Do not monitor
+Geeksfino/findesk-core from distribution repos.
+
 Cursor resolves the same files via [`.cursor/skills`](.cursor/skills) (symlink).
 
 ## Rules
