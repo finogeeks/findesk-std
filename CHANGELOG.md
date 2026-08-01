@@ -7,11 +7,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.21] - 2026-08-01
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.51-findesk-core.1` (OpenCode sandbox FS allowlist,
+  Hub/BYOK model wiring, Windows FinSAFE empty deny_read / narrow policy paths,
+  DingTalk delivery hardening, FinClaw channel assistant regression alignment).
+
 ### Added
 
 - Distribution template: daily **findesk-std upstream watch** workflow +
   `scripts/watch-findesk-std.sh` — opens `upstream:findesk-std` issues when the
   lock pin lags the latest public SDK (no auto bump).
+- Maintainer train: `scripts/stack/detect-core-drift.sh` + `core-drift-watch.yml`
+  (see Geeksfino/findesk `findesk-docs/contributing/core-sdk-release-train.md`).
 
 ## [2.1.20] - 2026-08-01
 
