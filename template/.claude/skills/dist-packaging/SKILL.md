@@ -57,6 +57,7 @@ before** packaging — do not skip that.
 | Integrity mismatch | Re-download tarball; fix lock digest |
 | Missing brand descriptor (builder throw) | `bun run materialize` then retry dist |
 | Private HTTPS 401 | Set `FINDESK_ARTIFACT_TOKEN` |
+| `aioncore binary not found` / Geeksfino curl 404 | Confirm `$FINDESK_PLATFORM/resources/bundled-aioncore/<plat-arch>/` exists with matching `manifest.json`; unset `FINDESK_PLATFORM` if it points at a monorepo; clear `~/.cache/findesk/platforms/<version>`. Do not tell customers to set Geeksfino `GH_TOKEN` for a normal findesk-std pin. |
 
 ## Paths
 

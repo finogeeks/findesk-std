@@ -7,6 +7,31 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.20] - 2026-08-01
+
+### Fixed
+
+- White-label `prepareAioncore`: reuse SDK-baked binaries even when an empty
+  `managed-resources/` leftover is present; avoid wiping the bake and hitting
+  private `Geeksfino/findesk-core` download URLs that 404 without `GH_TOKEN`.
+- Private release download fallback now tries the GitHub Releases API
+  (`Accept: application/octet-stream`) after `gh`, with clearer auth errors.
+- White-label missing-binary errors point at SDK cache / `FINDESK_PLATFORM`
+  instead of implying a public GitHub download.
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.50-findesk-core.1`.
+- Pin `finclawVersion` → `v0.10.7`.
+- Pin `finsafeVersion` → `v0.9.29` (Windows AppContainer warm-launch ACL/ProjFS
+  fast paths; pairs with Geeksfino/findesk-core#104 narrow Windows policy paths).
+
+### Desktop (included since 2.1.19)
+
+- Runtime install reliability, Hub model display name, Windows FinSAFE empty
+  deny_read RT mode, Models picker for weak ACP / Hermes, cloud subagent wake
+  via AG-UI, FinSAFE session posture settings, and related desktop fixes.
+
 ## [2.1.19] - 2026-07-24
 
 ### Changed

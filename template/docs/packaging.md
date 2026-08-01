@@ -60,5 +60,32 @@ Prefer dedicated square icons for production shipping.
 | ------- | ------------ |
 | `Unknown distribution` | Dist without materialize / missing `.brand.json` |
 | Integrity mismatch | Wrong tarball or digest in the lock |
+| `aioncore binary not found` / curl 404 on Geeksfino/findesk-core | SDK bake missing for that arch, wrong `FINDESK_PLATFORM`, or corrupt `~/.cache/findesk/platforms/<version>` — see checklist below. Customers should **not** need Geeksfino `GH_TOKEN` for a normal findesk-std pin. |
 | Wants Geeksfino `GH_TOKEN` | Overriding backend version away from the SDK-baked pin, or pinning a private URL without `FINDESK_ARTIFACT_TOKEN` |
 | Plugin missing in UI | Id not in `pack/tenant.json` `plugins.enable`, or package missing `findesk.pluginId` |
+
+### aioncore / private-repo 404 during `dist`
+
+findesk-std SDKs already ship `resources/bundled-aioncore/<platform-arch>/`. `dist` reuses that tree; it only hits GitHub when reuse fails.
+
+1. Confirm the resolved platform is the **SDK extract**, not a FinDesk monorepo:
+   ```bash
+   # scripts/lib.sh sets FINDESK_PLATFORM — or:
+   echo "$FINDESK_PLATFORM"
+   test -f "$FINDESK_PLATFORM/resources/bundled-aioncore/darwin-arm64/aioncore"
+   ```
+2. For the arch you are packaging (`--mac --x64` → `darwin-x64`, `--mac --arm64` → `darwin-arm64`), check:
+   ```bash
+   ls "$FINDESK_PLATFORM/resources/bundled-aioncore/darwin-x64/"
+   # expect: aioncore  manifest.json  (managed-resources optional on foreign arch)
+   cat "$FINDESK_PLATFORM/resources/bundled-aioncore/darwin-x64/manifest.json"
+   # version must match package.json aioncoreVersion / findesk.lock findeskCore.version
+   ```
+3. If missing or wrong version, clear the pin cache and re-resolve from `findesk.lock.json`:
+   ```bash
+   unset FINDESK_PLATFORM
+   rm -rf ~/.cache/findesk/platforms/<sdk-version>
+   bun run doctor
+   ```
+4. Prefer native arch when possible (`--mac --arm64` on Apple Silicon). Cross-arch (`--x64` on arm64) still works when the SDK bake for that arch is present.
+5. Only FinDesk engineers with access to private `Geeksfino/findesk-core` should set `GH_TOKEN` and use the `gh` CLI to force-download; browser `curl` URLs return 404 for private assets even with a token.
