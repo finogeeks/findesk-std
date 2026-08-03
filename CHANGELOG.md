@@ -7,6 +7,25 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.22] - 2026-08-03
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.52-findesk-core.1` (extension ACP catalog env
+  stored as `AgentEnvEntry` sequence so declared env is no longer dropped;
+  config-driven runtime allowlist via `AIONCORE_RUNTIME_POLICY_FILE` /
+  `runtime-policy.json`).
+
+### Added
+
+- Guid runtime picker: distribution `extraAllowedProviders` from the same
+  `runtime-policy.json` as backend admission (shared path resolution with
+  unpackaged Electron fallback).
+- My Agents / create-modal visual polish (proposal 0020 Phase A): portraits,
+  featured-tile imagery, human subtitles, token-based hover/scrim; tenant-pack
+  `brand.agentVisuals` → `__FINDESK_BRAND__` with `resolveAgentVisual`
+  precedence; Agent Store `iconAsset` enrichment via host `listPersonas`.
+
 ## [2.1.21] - 2026-08-01
 
 ### Changed
