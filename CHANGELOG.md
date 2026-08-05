@@ -7,6 +7,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.28] - 2026-08-05
+
+### Changed
+
+- Pin `finclawVersion` → `v0.11.1` and `finsafeVersion` → `v0.9.31` (baked into
+  the SDK tarball). Same desktop feature set as 2.1.27 otherwise.
+
 ## [2.1.27] - 2026-08-05
 
 ### Added
@@ -26,6 +33,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
   after default-model key migration.
 - Plugin sidecars stay `ready=false` when LLM resolution fails even if HTTP
   health passes (`llmError` separate from spawn errors).
+- Sidecar `ensure()` no longer coalesces onto an in-flight start — Hub LLM
+  token sync while the first spawn is in `waitUntilReady` re-evaluates
+  `FINCLAW_LLM_*` instead of leaving casst answering empty.
+- After a successful Hub LLM access-token sync, running plugin sidecars are
+  refreshed so they stop calling Hub with a stale JWT.
+- Plugin sidecar prepare re-runs when `versionPin` changes or when
+  `localArtifact` is newer than `prepare-manifest.json` (stale SDK cache).
+
+### Changed
+
+- Distribution template (`template/` / `docs/private-plugins.md` +
+  `dist-private-plugin` skill): documents `host.plugins.*` and
+  `findesk.sidecars[]` so white-label distros can ship privileged plugins
+  (storage / files / sidecars / MCP) without reverse-engineering FDE.
 
 ## [2.1.26] - 2026-08-05
 
