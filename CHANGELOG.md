@@ -7,6 +7,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.29] - 2026-08-05
+
+### Fixed
+
+- Plugin sidecar `ensure()` no longer deadlocks when Hub LLM auth refreshes
+  mid-start (nested `refreshRunningPluginSidecars` → `ensure`). Deferred
+  `reensureAfter` re-runs once with the post-Hub `FINCLAW_LLM_*` fingerprint so
+  Knowledge Vault / casst stops hanging on "Vault service: …" and does not
+  stay on no-credentials after login.
+- After a successful Hub LLM provider sync, running plugin sidecars are
+  refreshed (same path as access-token refresh).
+
 ## [2.1.28] - 2026-08-05
 
 ### Changed
