@@ -7,6 +7,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.23] - 2026-08-05
+
+### Added
+
+- Generic plugin sidecars and plugin platform privileges (proposal 0022); remove
+  first-party Knowledge Vault plugin ([#169](https://github.com/Geeksfino/findesk/pull/169)).
+- Agent-control delete/provision APIs and My Agents management UX ([#160](https://github.com/Geeksfino/findesk/pull/160)).
+- Cron platform phase 1 (desktop), Peer Share inbound env fix, and incremental
+  build source-hash fix ([#151](https://github.com/Geeksfino/findesk/pull/151)).
+
+### Changed
+
+- Same `aioncoreVersion` pin as 2.1.22 (`v0.1.52-findesk-core.1`). Pending
+  findesk-core branch merges are **not** included in this SDK release.
+
 ## [2.1.22] - 2026-08-03
 
 ### Changed
