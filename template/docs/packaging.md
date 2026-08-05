@@ -61,6 +61,7 @@ Prefer dedicated square icons for production shipping.
 | `Unknown distribution` | Dist without materialize / missing `.brand.json` |
 | Integrity mismatch | Wrong tarball or digest in the lock |
 | `aioncore binary not found` / curl 404 on Geeksfino/findesk-core | SDK bake missing for that arch, wrong `FINDESK_PLATFORM`, or corrupt `~/.cache/findesk/platforms/<version>` — see checklist below. Customers should **not** need Geeksfino `GH_TOKEN` for a normal findesk-std pin. |
+| `finsafe binary not configured` / sandbox unavailable / LLM provider config fails via FinSAFE refuse | findesk-std **< 2.1.26** omitted `bundled-finsafe` / `bundled-finclaw`. Bump lock to ≥ 2.1.26, or for local iteration use `FINDESK_PLATFORM=<findesk monorepo>` after `bun run prepare:findesk`. See skill `dist-packaging`. |
 | Wants Geeksfino `GH_TOKEN` | Overriding backend version away from the SDK-baked pin, or pinning a private URL without `FINDESK_ARTIFACT_TOKEN` |
 | Plugin missing in UI | Id not in `pack/tenant.json` `plugins.enable`, or package missing `findesk.pluginId` |
 

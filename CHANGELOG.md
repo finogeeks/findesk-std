@@ -7,6 +7,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.26] - 2026-08-05
+
+### Fixed
+
+- Bake public `finsafe` + `finclaw` pins into the desktop SDK tarball for every
+  packaged triple. FinSAFE-enabled distributions no longer start without
+  `AIONCORE_FINSAFE_BIN` / `AIONCORE_FINCLAW_BIN` on a clean pin (same
+  `aioncoreVersion` as 2.1.25).
+
 ## [2.1.25] - 2026-08-05
 
 ### Fixed

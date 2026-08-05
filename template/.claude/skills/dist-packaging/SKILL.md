@@ -37,7 +37,14 @@ bash scripts/watch-findesk-std.sh --dry-run
 ```
 
 Scripts set `FINDESK_DIST_REPO` and `FINDESK_WHITE_LABEL=1`. `dist.sh` **materializes
-before** packaging — do not skip that.
+before** packaging — do not skip that. Platform `dist` also **auto-prepares plugin
+sidecars** (same as `start`) and fails the build if a declared sidecar cannot be
+prepared.
+
+CI: `.github/workflows/dist.yml` (manual) builds installers per platform — it fetches
+the pinned SDK tarball from the findesk-std release, prepares sidecars (downloading
+e.g. `casst.tar.zst` per plugin manifests), materializes, dists, and uploads
+artifacts. Builds are unsigned until signing secrets are added.
 
 ## Checklist
 
@@ -46,6 +53,7 @@ before** packaging — do not skip that.
 - [ ] pack/tenant.json brand + configHome set
 - [ ] bun run doctor OK
 - [ ] bun run materialize wrote .materialized/<id>.brand.json under resolved SDK
+- [ ] Plugin sidecars prepared (resources/bundled-plugin-sidecars/<pluginId>/... under resolved SDK)
 - [ ] bun run dist completed
 - [ ] App boots with window title from brand (not Unknown distribution)
 ```
@@ -66,6 +74,14 @@ before** packaging — do not skip that.
 | Missing brand descriptor (builder throw) | `bun run materialize` then retry dist |
 | Private HTTPS 401 | Set `FINDESK_ARTIFACT_TOKEN` |
 | `aioncore binary not found` / Geeksfino curl 404 | Confirm `$FINDESK_PLATFORM/resources/bundled-aioncore/<plat-arch>/` exists with matching `manifest.json`; unset `FINDESK_PLATFORM` if it points at a monorepo; clear `~/.cache/findesk/platforms/<version>`. Do not tell customers to set Geeksfino `GH_TOKEN` for a normal findesk-std pin. |
+| `finsafe binary not configured` / 沙箱不可用（缺少 FinSafe） / `spawn refused by finsafe` blocking `finclaw config set llm.provider` | **SDK gap (fixed in findesk-std ≥ 2.1.26):** older pins bake aioncore only. Confirm `$FINDESK_PLATFORM/resources/bundled-finsafe/<plat-arch>/finsafe` and `…/bundled-finclaw/<plat-arch>/finclaw` exist. **Dev:** `FINDESK_PLATFORM=<findesk monorepo>` after `bun run prepare:findesk` in that monorepo. **Pin-only workaround:** from the extracted SDK root, `FINSAFE_VERSION=<lock pin> node packages/desktop/scripts/findesk/prepareFinsafe.js` and the finclaw twin, then restart. **Proper:** bump `findesk.lock.json` to ≥ 2.1.26. |
+
+## Dev vs pin (FinSAFE / FinClaw)
+
+| Mode | Command | Notes |
+| ---- | ------- | ----- |
+| Day-to-day iteration | `FINDESK_PLATFORM=/path/to/findesk bun run start` | Run `bun run prepare:findesk` in the monorepo once (or after pin bumps). |
+| Customer / lock smoke | `bun run start` (no override) | Needs findesk-std ≥ **2.1.26** for baked finsafe+finclaw when `finsafe: on`. |
 
 ## Paths
 
