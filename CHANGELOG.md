@@ -7,6 +7,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.24] - 2026-08-05
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.53-findesk-core.1`:
+  - Sync session MCP servers into FinClaw conversation profiles and
+    `runtime_home` config before serve (so vault / Guid-attached tools stay
+    available across resume).
+  - Self-heal stale ACP session ids on the prompt path after agent
+    restart/eviction.
+  - Release workflow skips GitHub Release publish when no build artifacts
+    uploaded.
+
 ## [2.1.23] - 2026-08-05
 
 ### Added
