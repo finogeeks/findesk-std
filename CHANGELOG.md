@@ -7,6 +7,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.25] - 2026-08-05
+
+### Fixed
+
+- Renderer start failure from an invalid JSX comment between props on Guid
+  (`AgentPillBar` / create-agent runtime refresh). Same `aioncoreVersion` as
+  2.1.24 (`v0.1.53-findesk-core.1`).
+
 ## [2.1.24] - 2026-08-05
 
 ### Changed
