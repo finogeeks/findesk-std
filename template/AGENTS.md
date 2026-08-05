@@ -32,4 +32,4 @@ Cursor resolves the same files via [`.cursor/skills`](.cursor/skills) (symlink).
 
 ## Human docs
 
-Start at [README.md](README.md) → [docs/getting-started.md](docs/getting-started.md).
+Start at [README.md](README.md) → [docs/getting-started.md](docs/getting-started.md) → [docs/hub-urls.md](docs/hub-urls.md) (optional hubs).

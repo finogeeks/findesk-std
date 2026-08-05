@@ -7,6 +7,26 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.27] - 2026-08-05
+
+### Added
+
+- Distribution-configured ChatKit / FinSkills hub URLs (Proposal 0024): optional
+  `integrations` on `pack/tenant.json`, materialize into brand, seed-once into
+  Settings, optional `hubUrlsLocked` for org-managed read-only hubs. Distro
+  template docs: `docs/hub-urls.md`.
+- Peer Share **Path H**: direct peer chat without local relay LLM, streaming UI,
+  Guid Peers picker contributions, progress/probe/reconnect contracts
+  ([#174](https://github.com/Geeksfino/findesk/pull/174)).
+
+### Fixed
+
+- Peer Share / plugin sidecar LLM env reads `findesk.defaultModel` (and legacy
+  `aionrs.defaultModel`) so serve no longer comes up with empty credentials
+  after default-model key migration.
+- Plugin sidecars stay `ready=false` when LLM resolution fails even if HTTP
+  health passes (`llmError` separate from spawn errors).
+
 ## [2.1.26] - 2026-08-05
 
 ### Fixed

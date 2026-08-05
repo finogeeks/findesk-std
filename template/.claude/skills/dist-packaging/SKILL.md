@@ -9,8 +9,10 @@ description: |
 
 # Distribution packaging
 
-Read [docs/getting-started.md](../../../docs/getting-started.md) and
-[docs/packaging.md](../../../docs/packaging.md) first.
+Read [docs/getting-started.md](../../../docs/getting-started.md),
+[docs/packaging.md](../../../docs/packaging.md), and
+[docs/hub-urls.md](../../../docs/hub-urls.md) (optional ChatKit / FinSkills hubs)
+first.
 
 ## Preconditions
 
@@ -51,6 +53,7 @@ artifacts. Builds are unsigned until signing secrets are added.
 ```
 - [ ] Lock pin valid (artifact exists or HTTPS URL reachable)
 - [ ] pack/tenant.json brand + configHome set
+- [ ] Optional integrations hubs validated (docs/hub-urls.md) when configured
 - [ ] bun run doctor OK
 - [ ] bun run materialize wrote .materialized/<id>.brand.json under resolved SDK
 - [ ] Plugin sidecars prepared (resources/bundled-plugin-sidecars/<pluginId>/... under resolved SDK)

@@ -40,7 +40,9 @@ Edit `findesk.lock.json`. Offline and online examples: [lock-examples.md](./lock
    (or set `brand.assets.macIcon` / `windowsIcon` / `linuxIcon`). When omitted, `materialize`
    synthesizes installer icons from the logo.
 3. Edit `pack/tenant.json` (`productName`, `appId`, `configHome`, locale, plugins).
-4. Edit `pack/distributions/<id>.json` if the SKU id or shell baseline changes.
+4. Optional: set ChatKit / FinSkills hub URLs under `integrations` — see
+   [hub-urls.md](./hub-urls.md).
+5. Edit `pack/distributions/<id>.json` if the SKU id or shell baseline changes.
 
 `configHome` isolates runtime data (e.g. `~/.acme`). Do not share it across products.
 
@@ -64,4 +66,4 @@ Scripts export `FINDESK_DIST_REPO` (this repo) and `FINDESK_WHITE_LABEL=1`.
 | `FINDESK_DISTRIBUTION_ID` | Override distribution id (default from `catalog.json`) |
 | `AIONCORE_PREFER_LOCAL` | Leave `0` / unset for customers |
 
-Next: [packaging.md](./packaging.md) · [private-plugins.md](./private-plugins.md).
+Next: [hub-urls.md](./hub-urls.md) · [packaging.md](./packaging.md) · [private-plugins.md](./private-plugins.md).
