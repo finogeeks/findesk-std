@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.30] - 2026-08-06
+
+### Added
+
+- Security Center & network governance (Proposal 0023): settings UI for egress
+  posture (open / controlled / locked), allowlist editing, deny toasts with
+  allow-once, audit panel, permission-health recheck, and distribution network
+  floor support.
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.54-findesk-core.1` (Security Center APIs +
+  spawn-time network policy / egress audit wiring).
+- Pin `finsafeVersion` → `v0.9.33` (`FINSAFE_PROXY_AUDIT_LOG` /
+  `FINSAFE_PROXY_ALLOWLIST_FILE` passthrough for run/self-confine).
+
 ## [2.1.29] - 2026-08-05
 
 ### Fixed
