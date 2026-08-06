@@ -1,5 +1,7 @@
 # findesk-std
 
+**English** | [中文](./README.zh-CN.md)
+
 Public **FinDesk desktop packaging SDK** artifacts for white-label **distribution repositories**.
 
 This repository holds **GitHub Release assets**, a **distribution-repo template**, and short
@@ -33,7 +35,8 @@ bun run materialize
 bun run start
 ```
 
-Template docs live under [`template/docs/`](./template/docs/). Agent skills after scaffold:
+Template docs live under [`template/docs/`](./template/docs/)
+([中文](./template/docs/README.zh-CN.md)). Agent skills after scaffold:
 `dist-packaging`, `dist-private-plugin` (see `template/AGENTS.md`).
 
 FinDesk engineers with a private checkout can use the equivalent:

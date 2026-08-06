@@ -1,15 +1,17 @@
 # Distribution developer docs
 
+**English** | [中文](./README.zh-CN.md)
+
 Public documentation for authors of this white-label FinDesk distribution.
 
 | Doc | Description |
 | --- | ----------- |
-| [getting-started.md](./getting-started.md) | SDK pin, doctor, first `start` |
-| [lock-examples.md](./lock-examples.md) | Offline vs online `findesk.lock.json` pins |
-| [hub-urls.md](./hub-urls.md) | Packaging-time ChatKit / FinSkills hub URLs |
-| [packaging.md](./packaging.md) | Materialize + installer builds |
-| [private-plugins.md](./private-plugins.md) | Private plugins under `plugins/` |
-| [local-paths.md](./local-paths.md) | Cache, app bundle, and runtime data locations |
-| [upstream-sdk.md](./upstream-sdk.md) | Daily findesk-std watch → lock-bump issues |
+| [getting-started.md](./getting-started.md) ([中文](./getting-started.zh-CN.md)) | SDK pin, doctor, first `start` |
+| [lock-examples.md](./lock-examples.md) ([中文](./lock-examples.zh-CN.md)) | Offline vs online `findesk.lock.json` pins |
+| [hub-urls.md](./hub-urls.md) ([中文](./hub-urls.zh-CN.md)) | Packaging-time ChatKit / FinSkills hub URLs |
+| [packaging.md](./packaging.md) ([中文](./packaging.zh-CN.md)) | Materialize + installer builds |
+| [private-plugins.md](./private-plugins.md) ([中文](./private-plugins.zh-CN.md)) | Private plugins under `plugins/` |
+| [local-paths.md](./local-paths.md) ([中文](./local-paths.zh-CN.md)) | Cache, app bundle, and runtime data locations |
+| [upstream-sdk.md](./upstream-sdk.md) ([中文](./upstream-sdk.zh-CN.md)) | Daily findesk-std watch → lock-bump issues |
 
 Agent skills: [../AGENTS.md](../AGENTS.md).
