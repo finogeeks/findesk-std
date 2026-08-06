@@ -7,6 +7,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.31] - 2026-08-06
+
+### Fixed
+
+- Pin `finclawVersion` → `v0.11.2` (tool-result truncation + Majordomo thrash class).
+- Unset bare shell `LLM_*` when spawning FinClaw for Peer Share and plugin
+  sidecars so Hub `FINCLAW_LLM_*` wins (`set_env_if_unset` hygiene).
+- Pin `aioncoreVersion` → `v0.1.55-findesk-core.1` (same bare-`LLM_*` strip on
+  conversation FinClaw serve).
+
 ## [2.1.30] - 2026-08-06
 
 ### Added
