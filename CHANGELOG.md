@@ -7,6 +7,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.32] - 2026-08-09
+
+### Changed
+
+- Pin `finclawVersion` → `v0.11.3` (layered tool display / `--details`, MCP
+  invocation-policy reconnect hardening).
+- Pin `aioncoreVersion` → `v0.1.57-findesk-core.1` (Layer-1 FinClaw display +
+  `tool_progress` ingest, ACP activity text on tool-call events, vault-first
+  `knowledge_ask` fix, Hermes SOUL fail-closed).
+
 ## [2.1.31] - 2026-08-06
 
 ### Fixed
