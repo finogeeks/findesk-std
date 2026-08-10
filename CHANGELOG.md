@@ -7,6 +7,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.33] - 2026-08-10
+
+### Added
+
+- `host.plugins.capture` (Proposal 0025): opt-in Screen Recording capture for
+  plugins, plus sidecar status `authToken` for runtime bearer auth.
+- Optional `headers` on `host.plugins.mcp.upsertHttp` so streamable HTTP MCP
+  entries can send `Authorization` (Skill Recorder `/mcp`).
+- Project hired Persona Store deployments into FinClaw/Hermes per-instance
+  runtime homes at admit time (hard-fail + rollback on projection failure).
+
 ## [2.1.32] - 2026-08-09
 
 ### Changed
