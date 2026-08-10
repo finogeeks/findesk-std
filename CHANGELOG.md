@@ -7,6 +7,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.34] - 2026-08-10
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.58-findesk-core.1` (cross-runtime session-search
+  MCP endpoint injected into FinClaw / HTTP-capable ACP sessions).
+- Pin `finclawVersion` → `v0.11.4` (MCP progress relay + long-tool heartbeats).
+- Pin `finsafeVersion` → `v0.9.34` (unified `SandboxViolation` audit records;
+  macOS `allow_local_binding` AF_UNIX IPC under restricted egress).
+
 ## [2.1.33] - 2026-08-10
 
 ### Added
