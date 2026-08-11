@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.35] - 2026-08-11
+
+### Changed
+
+- Pin `finclawVersion` → `v0.11.5` (stream chunk delivery fix; tool-result
+  spill head-tail recovery, in-band `read_file` continuation, budget
+  hysteresis, MCP `_meta.retention` hints).
+- Keep `aioncoreVersion` at `v0.1.58-findesk-core.1` and `finsafeVersion` at
+  `v0.9.34` (no core rebake this cycle).
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.58-findesk-core.1`
+- `finclawVersion`: `v0.11.5`
+- `finsafeVersion`: `v0.9.34`
+
 ## [2.1.34] - 2026-08-10
 
 ### Changed
