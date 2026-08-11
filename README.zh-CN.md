@@ -50,7 +50,7 @@ bun run start
 | `findesk-desktop-sdk-<semver>.tar.gz` | 可重定位的打包 SDK（Electron 应用源、一等插件/壳、`findesk` CLI、打包脚本） |
 | `findesk-desktop-sdk-<semver>.sha256` | 摘要文件（`<hex>  <filename>`） |
 | `findesk-desktop-sdk-<semver>.lock.snippet.json` | 可复制进分发仓库 `findesk.lock.json` 的字段 |
-| `findesk-desktop-sdk-<semver>.manifest.json` | 构建元数据（`gitSha`、`aioncoreVersion` 等） |
+| `findesk-desktop-sdk-<semver>.manifest.json` | 构建元数据（`gitSha`、`aioncoreVersion`、`finclawVersion`、`finsafeVersion` 等） |
 | `SHA256SUMS` | 整次 Release 的校验和 |
 
 已发布桌面三元组的运行时二进制**已烘焙进 SDK**，位于

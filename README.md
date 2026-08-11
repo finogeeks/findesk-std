@@ -52,7 +52,7 @@ Each [GitHub Release](https://github.com/finogeeks/findesk-std/releases) tagged 
 | `findesk-desktop-sdk-<semver>.tar.gz` | Relocatable packaging SDK (Electron app sources, first-party plugins/shells, `findesk` CLI, packaging scripts) |
 | `findesk-desktop-sdk-<semver>.sha256` | Digest file (`<hex>  <filename>`) |
 | `findesk-desktop-sdk-<semver>.lock.snippet.json` | Fields to copy into a distribution repo’s `findesk.lock.json` |
-| `findesk-desktop-sdk-<semver>.manifest.json` | Build metadata (`gitSha`, `aioncoreVersion`, …) |
+| `findesk-desktop-sdk-<semver>.manifest.json` | Build metadata (`gitSha`, `aioncoreVersion`, `finclawVersion`, `finsafeVersion`, …) |
 | `SHA256SUMS` | Release-wide checksums |
 
 Runtime binaries for published desktop triples are **baked into the SDK** under

@@ -17,6 +17,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 - Pin `finsafeVersion` → `v0.9.34` (unified `SandboxViolation` audit records;
   macOS `allow_local_binding` AF_UNIX IPC under restricted egress).
 
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.58-findesk-core.1`
+- `finclawVersion`: `v0.11.4`
+- `finsafeVersion`: `v0.9.34`
+
 ## [2.1.33] - 2026-08-10
 
 ### Added
