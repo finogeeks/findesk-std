@@ -36,8 +36,10 @@ bun run start
 ```
 
 Template docs live under [`template/docs/`](./template/docs/)
-([中文](./template/docs/README.zh-CN.md)). Agent skills after scaffold:
-`dist-packaging`, `dist-private-plugin` (see `template/AGENTS.md`).
+([中文](./template/docs/README.zh-CN.md)), including hub URLs and
+[`telemetry`](./template/docs/telemetry.md) (Sentry / OTLP pack config).
+Agent skills after scaffold: `dist-packaging`, `dist-private-plugin` (see
+`template/AGENTS.md`).
 
 FinDesk engineers with a private checkout can use the equivalent:
 

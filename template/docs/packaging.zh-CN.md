@@ -47,6 +47,7 @@ out/<Product>-<distribution-id>-<version>-mac-arm64.zip
 - [ ] `bun run dist` 完成（会先 materialize）
 - [ ] 窗口标题 / `configHome` 与 `pack/tenant.json` 一致
 - [ ] Hub URL（若配置）：`materialize` 打印 `chatkitHub` / `finskills` — 见 [hub-urls.zh-CN.md](./hub-urls.zh-CN.md)
+- [ ] 遥测（若配置）：`doctor` 接受 DSN；在你们的 Sentry 做 staging 冒烟 — 见 [telemetry.zh-CN.md](./telemetry.zh-CN.md)
 - [ ] 打包后 Dock / 任务栏图标与名称符合品牌（非 Electron / FinDesk 默认）
 - [ ] `plugins.enable` / `plugins.private` 中的私有插件启动后可见
 

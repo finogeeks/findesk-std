@@ -46,6 +46,7 @@ Exact product / executable names come from the pack + SDK electron-builder confi
 - [ ] `bun run dist` completes (materialize runs first)
 - [ ] Window title / `configHome` match `pack/tenant.json`
 - [ ] Hub URLs (if set): `materialize` prints `chatkitHub` / `finskills` — see [hub-urls.md](./hub-urls.md)
+- [ ] Telemetry (if set): `doctor` accepts DSN; staging smoke in your Sentry — see [telemetry.md](./telemetry.md)
 - [ ] Packaged Dock / taskbar icon + name match brand (not Electron / FinDesk defaults)
 - [ ] Private plugins listed in `plugins.enable` / `plugins.private` appear after boot
 

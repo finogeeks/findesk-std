@@ -42,7 +42,9 @@ Edit `findesk.lock.json`. Offline and online examples: [lock-examples.md](./lock
 3. Edit `pack/tenant.json` (`productName`, `appId`, `configHome`, locale, plugins).
 4. Optional: set ChatKit / FinSkills hub URLs under `integrations` — see
    [hub-urls.md](./hub-urls.md).
-5. Edit `pack/distributions/<id>.json` if the SKU id or shell baseline changes.
+5. Optional: pin customer Sentry / OTLP under `telemetry` — see
+   [telemetry.md](./telemetry.md).
+6. Edit `pack/distributions/<id>.json` if the SKU id or shell baseline changes.
 
 `configHome` isolates runtime data (e.g. `~/.acme`). Do not share it across products.
 

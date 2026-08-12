@@ -9,6 +9,7 @@
 | [getting-started.zh-CN.md](./getting-started.zh-CN.md) | SDK 固定版本、doctor、首次 `start` |
 | [lock-examples.zh-CN.md](./lock-examples.zh-CN.md) | 离线 / 在线 `findesk.lock.json` 示例 |
 | [hub-urls.zh-CN.md](./hub-urls.zh-CN.md) | 打包时配置 ChatKit / FinSkills Hub URL |
+| [telemetry.zh-CN.md](./telemetry.zh-CN.md) | Pack Sentry / OTLP DSN、同意与 staging 冒烟 |
 | [packaging.zh-CN.md](./packaging.zh-CN.md) | Materialize + 安装包构建 |
 | [private-plugins.zh-CN.md](./private-plugins.zh-CN.md) | `plugins/` 下的私有插件 |
 | [local-paths.zh-CN.md](./local-paths.zh-CN.md) | 缓存、应用包与运行时数据路径 |

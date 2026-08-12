@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.36] - 2026-08-12
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.59-findesk-core.1` (TS wire bindings from Rust
+  types; Windows FinSAFE temp default-off; optional aioncore Sentry adapter;
+  Guid/send UX `turn_started_at` clock; Hermes create routing + OpenCode
+  persona soft-skip on the desktop host).
+- Keep `finclawVersion` at `v0.11.5` and `finsafeVersion` at `v0.9.34`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.59-findesk-core.1`
+- `finclawVersion`: `v0.11.5`
+- `finsafeVersion`: `v0.9.34`
+
 ## [2.1.35] - 2026-08-11
 
 ### Changed

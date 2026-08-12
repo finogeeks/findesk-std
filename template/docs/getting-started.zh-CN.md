@@ -44,7 +44,9 @@ GitHub token。Geeksfino 组织 token 仅供 FinDesk 维护者使用。
 3. 编辑 `pack/tenant.json`（`productName`、`appId`、`configHome`、语言、插件）。
 4. 可选：在 `integrations` 下配置 ChatKit / FinSkills Hub URL — 见
    [hub-urls.zh-CN.md](./hub-urls.zh-CN.md)。
-5. 若 SKU id 或 shell 基线变更，编辑 `pack/distributions/<id>.json`。
+5. 可选：在 `telemetry` 下固定客户 Sentry / OTLP — 见
+   [telemetry.zh-CN.md](./telemetry.zh-CN.md)。
+6. 若 SKU id 或 shell 基线变更，编辑 `pack/distributions/<id>.json`。
 
 `configHome` 隔离运行时数据（例如 `~/.acme`）。不要在多个产品间共用。
 
