@@ -5,6 +5,11 @@ Public release notes for `finogeeks/findesk-std` desktop SDK artifacts.
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 `Geeksfino/findesk` `package.json` `version` for the published tag.
 
+## [2.1.37] - 2026-08-12
+
+### Added
+- Distro-scoped online update: GitHub Releases / optional generic feed via `release.onlineUpdate`, channel gate, and electron-builder publish overlay.
+
 ## [Unreleased]
 
 ## [2.1.36] - 2026-08-12
