@@ -11,13 +11,14 @@ CONFIG_HOME=""
 APP_ID=""
 PRODUCT_NAME=""
 SHELL_ID="findesk-classic"
+CLOUD_SURFACES=""
 
 usage() {
   cat >&2 <<'EOF'
 Usage: bash scripts/init-identity.sh \
   --tenant-id <id> --distribution-id <id> --config-home <slug> \
   --app-id <reverse.dns> --product-name <name> \
-  [--shell findesk-classic] [--repo-dir <path>]
+  [--shell findesk-classic] [--cloud-surfaces on|off] [--repo-dir <path>]
 EOF
   exit 1
 }
@@ -30,6 +31,7 @@ while [[ $# -gt 0 ]]; do
     --app-id) APP_ID="${2:-}"; shift 2 ;;
     --product-name) PRODUCT_NAME="${2:-}"; shift 2 ;;
     --shell) SHELL_ID="${2:-}"; shift 2 ;;
+    --cloud-surfaces) CLOUD_SURFACES="${2:-}"; shift 2 ;;
     --repo-dir) REPO_DIR="${2:-}"; shift 2 ;;
     -h|--help) usage ;;
     *) echo "error: unknown argument: $1" >&2; usage ;;
@@ -38,6 +40,11 @@ done
 
 if [[ -z "$TENANT_ID" || -z "$DISTRIBUTION_ID" || -z "$CONFIG_HOME" || -z "$APP_ID" || -z "$PRODUCT_NAME" ]]; then
   echo "error: tenant-id, distribution-id, config-home, app-id, and product-name are required" >&2
+  usage
+fi
+
+if [[ -n "$CLOUD_SURFACES" && "$CLOUD_SURFACES" != "on" && "$CLOUD_SURFACES" != "off" ]]; then
+  echo "error: --cloud-surfaces must be on or off" >&2
   usage
 fi
 
@@ -59,6 +66,12 @@ EXECUTABLE_NAME="$(
     print out
   }'
 )"
+
+POLICY_CLOUD_SURFACES=""
+if [[ "$CLOUD_SURFACES" == "off" || "$CLOUD_SURFACES" == "on" ]]; then
+  POLICY_CLOUD_SURFACES=",
+    \"cloudSurfaces\": \"${CLOUD_SURFACES}\""
+fi
 
 mkdir -p \
   "$REPO_DIR/pack/distributions" \
@@ -118,7 +131,7 @@ cat >"$REPO_DIR/pack/tenant.json" <<EOF
     "allowedTrustZones": ["on-device", "private-cloud"],
     "defaultTrustZone": "on-device",
     "locale": "en-US",
-    "allowAmbientPathDiscovery": false
+    "allowAmbientPathDiscovery": false${POLICY_CLOUD_SURFACES}
   },
   "plugins": {
     "enable": [],

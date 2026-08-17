@@ -5,6 +5,10 @@
 在 `pack/tenant.json` 中固定本分发的 ChatKit Hub 与 FinSkills Hub 端点，
 使打包安装后直接指向你的 Hub（无需每个用户打开「设置 → 集成」）。
 
+**`policy.cloudSurfaces` 为 `"off"`（纯底座）时不要配置 Hub URL。**
+见 [cloud-surfaces.zh-CN.md](./cloud-surfaces.zh-CN.md)。`bun run doctor`
+会拒绝 `cloudSurfaces: "off"` 与 Hub URL / `hubUrlsLocked: true` 同时出现。
+
 需要包含 **Proposal 0024**（Hub URL materialize + seed/lock）的桌面 SDK。
 若 `bun run materialize` 未打印 `chatkitHub:` / `finskills:` 行，请将
 `findesk.lock.json` 升到带该能力的 findesk-std 版本（本地迭代也可用

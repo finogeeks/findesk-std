@@ -4,6 +4,10 @@ Pin your distribution’s ChatKit Hub and FinSkills Hub endpoints in
 `pack/tenant.json` so packaged installs come up pointed at your hubs
 (without asking every user to open Settings → Integrations).
 
+**Do not configure Hub URLs when `policy.cloudSurfaces` is `"off"`** (pure-base
+SKU). See [cloud-surfaces.md](./cloud-surfaces.md). `bun run doctor` rejects
+`cloudSurfaces: "off"` combined with hub URLs or `hubUrlsLocked: true`.
+
 Requires a desktop SDK that includes **Proposal 0024** (hub URL materialize +
 seed/lock). If `bun run materialize` does not print `chatkitHub:` /
 `finskills:` lines, bump `findesk.lock.json` to a findesk-std release that

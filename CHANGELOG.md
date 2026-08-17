@@ -5,6 +5,29 @@ Public release notes for `finogeeks/findesk-std` desktop SDK artifacts.
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 `Geeksfino/findesk` `package.json` `version` for the published tag.
 
+## [Unreleased]
+
+## [2.1.38] - 2026-08-17
+
+### Added
+
+- Plugin System 2.0: `FinDeskPlugin` / fibers / Settings → Plugins workstation
+  deny list (#310).
+- Sidecar `injectHostLlm: false` so own-model plugins skip Hub LLM inject (#308).
+- Cron projection writer (default still `legacy_remirror`) (#309).
+
+### Changed
+
+- Pin `finclawVersion` → `v0.11.6`.
+- Pin `finsafeVersion` → `v0.9.37`.
+- Keep `aioncoreVersion` at `v0.1.59-findesk-core.1` (no core rebake this cycle).
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.59-findesk-core.1`
+- `finclawVersion`: `v0.11.6`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.37] - 2026-08-12
 
 ### Added
