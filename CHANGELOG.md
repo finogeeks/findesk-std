@@ -7,6 +7,32 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.40] - 2026-08-19
+
+### Added
+
+- Online-update feed contract (proposal 0027): shared `updateChannel` matrix,
+  `${executableName}` installer names, and `publishOnlineUpdate.ts` which
+  dual-writes `latest-arm64-mac.yml`, rewrites hyphen/dot urls onto disk
+  names, and uploads only yml-referenced assets plus required channel files
+  (#327).
+
+### Fixed
+
+- Quit no longer warns `FinclawCronSync` `fetch failed` after aioncore has
+  already stopped (#326).
+
+### Changed
+
+- Keep `aioncoreVersion` at `v0.1.60-findesk-core.1`.
+- Keep `finclawVersion` at `v0.11.6` and `finsafeVersion` at `v0.9.37`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.1`
+- `finclawVersion`: `v0.11.6`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.39] - 2026-08-19
 
 ### Added
