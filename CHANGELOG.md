@@ -7,6 +7,29 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.39] - 2026-08-19
+
+### Added
+
+- In-app agent browser tabs (single-target CDP bridge; default on) (#324).
+- Upstream watch digest shows the AionUi / AionCore release being scanned (#323).
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.60-findesk-core.1`.
+- Keep `finclawVersion` at `v0.11.6` and `finsafeVersion` at `v0.9.37`.
+
+### Fixed
+
+- Cron projection writer defaults to `event` (chat history no longer `addJob`).
+  Same release train as findesk-core `finclaw-reconcile`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.1`
+- `finclawVersion`: `v0.11.6`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.38] - 2026-08-17
 
 ### Added
@@ -31,6 +54,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 ## [2.1.37] - 2026-08-12
 
 ### Added
+
 - Distro-scoped online update: GitHub Releases / optional generic feed via `release.onlineUpdate`, channel gate, and electron-builder publish overlay.
 
 ## [Unreleased]
@@ -335,4 +359,3 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 - First public `findesk-desktop-sdk-2.1.16` release assets on `finogeeks/findesk-std`.
 - Lock snippet + integrity for online pin from white-label distribution repos.
-
