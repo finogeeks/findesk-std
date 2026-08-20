@@ -12,13 +12,29 @@ APP_ID=""
 PRODUCT_NAME=""
 SHELL_ID="findesk-classic"
 CLOUD_SURFACES=""
+UPDATE_ORIGIN="none"
+GITHUB_REPO=""
+FEED_URL=""
+PUBLISH_ADAPTER=""
+S3_BUCKET=""
+S3_PREFIX=""
+S3_ENDPOINT=""
+S3_REGION=""
+RSYNC_HOST=""
+RSYNC_PATH=""
+FILE_PATH=""
 
 usage() {
   cat >&2 <<'EOF'
 Usage: bash scripts/init-identity.sh \
   --tenant-id <id> --distribution-id <id> --config-home <slug> \
   --app-id <reverse.dns> --product-name <name> \
-  [--shell findesk-classic] [--cloud-surfaces on|off] [--repo-dir <path>]
+  [--shell findesk-classic] [--cloud-surfaces on|off] [--repo-dir <path>] \
+  [--update-origin github|generic|external|none] \
+  [--github-repo <owner/repo>] \
+  [--feed-url <https://…>] [--publish-adapter s3|rsync|file] \
+  [--s3-bucket <name>] [--s3-prefix <prefix>] [--s3-endpoint <url>] [--s3-region <region>] \
+  [--rsync-host <host>] [--rsync-path <path>] [--file-path <path>]
 EOF
   exit 1
 }
@@ -33,6 +49,17 @@ while [[ $# -gt 0 ]]; do
     --shell) SHELL_ID="${2:-}"; shift 2 ;;
     --cloud-surfaces) CLOUD_SURFACES="${2:-}"; shift 2 ;;
     --repo-dir) REPO_DIR="${2:-}"; shift 2 ;;
+    --update-origin) UPDATE_ORIGIN="${2:-}"; shift 2 ;;
+    --github-repo) GITHUB_REPO="${2:-}"; shift 2 ;;
+    --feed-url) FEED_URL="${2:-}"; shift 2 ;;
+    --publish-adapter) PUBLISH_ADAPTER="${2:-}"; shift 2 ;;
+    --s3-bucket) S3_BUCKET="${2:-}"; shift 2 ;;
+    --s3-prefix) S3_PREFIX="${2:-}"; shift 2 ;;
+    --s3-endpoint) S3_ENDPOINT="${2:-}"; shift 2 ;;
+    --s3-region) S3_REGION="${2:-}"; shift 2 ;;
+    --rsync-host) RSYNC_HOST="${2:-}"; shift 2 ;;
+    --rsync-path) RSYNC_PATH="${2:-}"; shift 2 ;;
+    --file-path) FILE_PATH="${2:-}"; shift 2 ;;
     -h|--help) usage ;;
     *) echo "error: unknown argument: $1" >&2; usage ;;
   esac
@@ -43,10 +70,38 @@ if [[ -z "$TENANT_ID" || -z "$DISTRIBUTION_ID" || -z "$CONFIG_HOME" || -z "$APP_
   usage
 fi
 
+json_value_guard() {
+  local label="$1"
+  local value="$2"
+  if [[ -n "$value" && ( "$value" == *'"'* || "$value" == *'\'* ) ]]; then
+    echo "error: ${label} must not contain double quotes or backslashes" >&2
+    exit 1
+  fi
+}
+
+for _id_field in \
+  "tenant-id:$TENANT_ID" \
+  "distribution-id:$DISTRIBUTION_ID" \
+  "config-home:$CONFIG_HOME" \
+  "app-id:$APP_ID" \
+  "product-name:$PRODUCT_NAME" \
+  "shell:$SHELL_ID"; do
+  json_value_guard "${_id_field%%:*}" "${_id_field#*:}"
+done
+
+if [[ "$PRODUCT_NAME" == */* ]]; then
+  echo "error: product-name must not contain slashes (breaks README substitution)" >&2
+  exit 1
+fi
+
 if [[ -n "$CLOUD_SURFACES" && "$CLOUD_SURFACES" != "on" && "$CLOUD_SURFACES" != "off" ]]; then
   echo "error: --cloud-surfaces must be on or off" >&2
   usage
 fi
+
+for _uo_val in "$GITHUB_REPO" "$FEED_URL" "$S3_BUCKET" "$S3_PREFIX" "$S3_ENDPOINT" "$S3_REGION" "$RSYNC_HOST" "$RSYNC_PATH" "$FILE_PATH"; do
+  json_value_guard "update-origin value" "$_uo_val"
+done
 
 REPO_DIR="$(cd "$REPO_DIR" && pwd)"
 YEAR="$(date +%Y)"
@@ -72,6 +127,45 @@ if [[ "$CLOUD_SURFACES" == "off" || "$CLOUD_SURFACES" == "on" ]]; then
   POLICY_CLOUD_SURFACES=",
     \"cloudSurfaces\": \"${CLOUD_SURFACES}\""
 fi
+
+RELEASE_UPDATE=""
+case "$UPDATE_ORIGIN" in
+  none) RELEASE_UPDATE="" ;;
+  github)
+    [[ -n "$GITHUB_REPO" ]] || { echo "error: --github-repo required for --update-origin github" >&2; exit 1; }
+    RELEASE_UPDATE=",
+    \"onlineUpdate\": { \"githubRepo\": \"${GITHUB_REPO}\" },
+    \"publish\": { \"adapter\": \"github\" }" ;;
+  external)
+    [[ -n "$FEED_URL" ]] || { echo "error: --feed-url required for --update-origin external" >&2; exit 1; }
+    [[ "$FEED_URL" == https://* ]] || { echo "error: --feed-url must be https (edit pack/tenant.json manually for intranet http + allowInsecureFeedUrl)" >&2; exit 1; }
+    RELEASE_UPDATE=",
+    \"onlineUpdate\": { \"feedUrl\": \"${FEED_URL}\" },
+    \"publish\": { \"adapter\": \"external\" }" ;;
+  generic)
+    [[ -n "$FEED_URL" && -n "$PUBLISH_ADAPTER" ]] || { echo "error: --feed-url and --publish-adapter required for --update-origin generic" >&2; exit 1; }
+    [[ "$FEED_URL" == https://* ]] || { echo "error: --feed-url must be https (edit pack/tenant.json manually for intranet http + allowInsecureFeedUrl)" >&2; exit 1; }
+    case "$PUBLISH_ADAPTER" in
+      s3)
+        [[ -n "$S3_BUCKET" ]] || { echo "error: --s3-bucket required for s3" >&2; exit 1; }
+        PUBLISH_JSON="{ \"adapter\": \"s3\", \"bucket\": \"${S3_BUCKET}\""
+        [[ -n "$S3_PREFIX" ]] && PUBLISH_JSON+=", \"prefix\": \"${S3_PREFIX}\""
+        [[ -n "$S3_ENDPOINT" ]] && PUBLISH_JSON+=", \"endpoint\": \"${S3_ENDPOINT}\""
+        [[ -n "$S3_REGION" ]] && PUBLISH_JSON+=", \"region\": \"${S3_REGION}\""
+        PUBLISH_JSON+=" }" ;;
+      rsync)
+        [[ -n "$RSYNC_HOST" && -n "$RSYNC_PATH" ]] || { echo "error: --rsync-host and --rsync-path required for rsync" >&2; exit 1; }
+        PUBLISH_JSON="{ \"adapter\": \"rsync\", \"host\": \"${RSYNC_HOST}\", \"path\": \"${RSYNC_PATH}\" }" ;;
+      file)
+        [[ -n "$FILE_PATH" ]] || { echo "error: --file-path required for file" >&2; exit 1; }
+        PUBLISH_JSON="{ \"adapter\": \"file\", \"path\": \"${FILE_PATH}\" }" ;;
+      *) echo "error: --publish-adapter must be s3|rsync|file for generic" >&2; exit 1 ;;
+    esac
+    RELEASE_UPDATE=",
+    \"onlineUpdate\": { \"feedUrl\": \"${FEED_URL}\" },
+    \"publish\": ${PUBLISH_JSON}" ;;
+  *) echo "error: --update-origin must be github|generic|external|none" >&2; exit 1 ;;
+esac
 
 mkdir -p \
   "$REPO_DIR/pack/distributions" \
@@ -125,7 +219,7 @@ cat >"$REPO_DIR/pack/tenant.json" <<EOF
   "release": {
     "channel": "beta",
     "publishTarget": "${CONFIG_HOME}-releases",
-    "signingProfile": "development"
+    "signingProfile": "development"${RELEASE_UPDATE}
   },
   "policy": {
     "allowedTrustZones": ["on-device", "private-cloud"],
@@ -189,7 +283,8 @@ cat >"$REPO_DIR/package.json" <<EOF
     "doctor": "bash scripts/doctor.sh",
     "materialize": "bash scripts/materialize.sh",
     "start": "bash scripts/start.sh",
-    "dist": "bash scripts/dist.sh"
+    "dist": "bash scripts/dist.sh",
+    "publish:online-update": "bash scripts/publish-online-update.sh"
   }
 }
 EOF

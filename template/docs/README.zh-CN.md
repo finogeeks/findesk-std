@@ -12,6 +12,7 @@
 | [cloud-surfaces.zh-CN.md](./cloud-surfaces.zh-CN.md) | 纯底座：`policy.cloudSurfaces: "off"` |
 | [telemetry.zh-CN.md](./telemetry.zh-CN.md) | Pack Sentry / OTLP DSN、同意与 staging 冒烟 |
 | [packaging.zh-CN.md](./packaging.zh-CN.md) | Materialize + 安装包构建 |
+| [update-feed.zh-CN.md](./update-feed.zh-CN.md) | 在线升级源与发布适配器 |
 | [private-plugins.zh-CN.md](./private-plugins.zh-CN.md) | `plugins/` 下的私有插件 |
 | [local-paths.zh-CN.md](./local-paths.zh-CN.md) | 缓存、应用包与运行时数据路径 |
 | [upstream-sdk.zh-CN.md](./upstream-sdk.zh-CN.md) | 每日 findesk-std 监视 → 升版 Issue |

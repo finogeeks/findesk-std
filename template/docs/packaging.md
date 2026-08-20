@@ -23,7 +23,11 @@ the platform `dist` binary by hand.
 bun run materialize
 bun run dist -- --mac --arm64 --pack-only   # Vite package smoke (faster)
 bun run dist -- --mac --arm64               # DMG / zip (needs local signing setup for release)
+# After a real dist, publish the electron-updater feed (proposal 0032):
+# bun run publish:online-update -- --out-dir "$FINDESK_PLATFORM/out" --dry-run
 ```
+
+Online-update publish (GitHub / S3 / rsync / file) is documented in [update-feed.md](./update-feed.md).
 
 Pass-through args after `--` go to the platform builder (`--win`, `--linux`, arch flags, etc.).
 

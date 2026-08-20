@@ -7,6 +7,34 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.41] - 2026-08-20
+
+### Added
+
+- Generic update origin (proposal 0032): pluggable publish adapters
+  (`github` / `s3` / `rsync` / `file` / `external`) behind `--publish` on
+  the existing `publishOnlineUpdate.ts` CLI. Distros configure
+  `release.publish` (non-secret); the 0027 prepare-only path stays when
+  `--publish` is omitted. Publish-time signature gate, doctor
+  update-origin checks + `--probe` (#333).
+- Structured question card for `AskUserQuestion` (#330).
+
+### Fixed
+
+- Shared Skill Hub install allowlist; unpackaged white flash (#328).
+- GitHub Issues when git remote is named Origin (#329).
+
+### Changed
+
+- Keep `aioncoreVersion` at `v0.1.60-findesk-core.1`.
+- Keep `finclawVersion` at `v0.11.6` and `finsafeVersion` at `v0.9.37`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.1`
+- `finclawVersion`: `v0.11.6`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.40] - 2026-08-19
 
 ### Added

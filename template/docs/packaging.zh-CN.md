@@ -24,7 +24,11 @@ Unknown distribution: "<id>". Known: consumer-hk, findesk-classic, opc-advisory
 bun run materialize
 bun run dist -- --mac --arm64 --pack-only   # Vite 打包冒烟（更快）
 bun run dist -- --mac --arm64               # DMG / zip（发版需本地签名配置）
+# 真实 dist 之后发布 electron-updater 源（提案 0032）：
+# bun run publish:online-update -- --out-dir "$FINDESK_PLATFORM/out" --dry-run
 ```
+
+在线升级发布（GitHub / S3 / rsync / file）见 [update-feed.zh-CN.md](./update-feed.zh-CN.md)。
 
 `--` 之后的参数透传给平台构建器（`--win`、`--linux`、架构标志等）。
 

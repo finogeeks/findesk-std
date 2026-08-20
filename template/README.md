@@ -36,6 +36,7 @@ bun run dist -- --mac --arm64          # full installer (or --pack-only for smok
 | --- | ----- |
 | [docs/getting-started.md](docs/getting-started.md) | Lock pin, doctor, first run |
 | [docs/packaging.md](docs/packaging.md) | `materialize` / `dist`, signing, installers |
+| [docs/update-feed.md](docs/update-feed.md) | Online update origin + publish adapters |
 | [docs/private-plugins.md](docs/private-plugins.md) | Author private plugins under `plugins/` |
 | [docs/local-paths.md](docs/local-paths.md) | Where SDK cache, app, and user data land |
 | [docs/upstream-sdk.md](docs/upstream-sdk.md) | Daily findesk-std watch → upgrade issues |
@@ -58,7 +59,7 @@ See [AGENTS.md](AGENTS.md) for routing.
 ├── pack/                 # brand, identity, distribution SKU
 ├── plugins/              # optional @findesk-private/* plugins
 ├── artifacts/            # optional offline SDK tarball
-├── scripts/              # doctor / materialize / start / dist / watch-findesk-std
+├── scripts/              # doctor / materialize / start / dist / publish-online-update / watch-findesk-std
 ├── docs/                 # public developer docs
 ├── .github/workflows/    # findesk-std upstream watch (daily)
 └── .claude/skills/       # agent skills (Cursor: .cursor/skills → symlink)
