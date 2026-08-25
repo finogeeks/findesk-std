@@ -7,6 +7,34 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.42] - 2026-08-25
+
+### Added
+
+- Guid fleet MCP wildcard (`sessionMcpAttachments["*"]`), sidecar Bearer
+  on product-wired upsert, and Guid landing prefill (#390). White-label
+  boards can attach a product MCP to every hired Guid session.
+- FinClaw continuation UX (#389).
+- DeepSeek Harness catalog ACP; Codex denied in the runtime catalog (#368).
+
+### Fixed
+
+- ShadowView heading-size markup (#387) and Arco Spin vertical centering
+  (#373).
+- Streaming markdown / finish-stamp alignment with `contentPhase` (#372).
+
+### Changed
+
+- Pin `finclawVersion` → `v0.12.4`.
+- Keep `aioncoreVersion` at `v0.1.60-findesk-core.1` and `finsafeVersion`
+  at `v0.9.37` (no core rebake this cycle).
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.1`
+- `finclawVersion`: `v0.12.4`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.41] - 2026-08-20
 
 ### Added
