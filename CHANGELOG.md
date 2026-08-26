@@ -7,6 +7,33 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.45] - 2026-08-26
+
+### Added
+
+- Bundle `officecli` sidecar (`officecliVersion` `v1.0.145`) next to
+  finclaw/finsafe.
+
+### Fixed
+
+- Pack-host Python/Git Bash bootstrap on Windows.
+- Pin FinClaw → `v0.12.5` so loopback plugin MCP (for example
+  `core-market`) starts when exec WAN is denied.
+- Keep checksum-verified `officecli` when `--version` cannot run on the
+  Linux pack host.
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.60-findesk-core.3`.
+- Pin `finclawVersion` → `v0.12.5`. FinSAFE stays `v0.9.37`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.3`
+- `finclawVersion`: `v0.12.5`
+- `finsafeVersion`: `v0.9.37`
+- `officecliVersion`: `v1.0.145`
+
 ## [2.1.44] - 2026-08-26
 
 ### Fixed

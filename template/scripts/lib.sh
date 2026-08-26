@@ -10,9 +10,54 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LOCK="$ROOT/findesk.lock.json"
 
+# Real Python binary. Windows Store `python3` in WindowsApps is a stub that
+# exits 49 without an interpreter — aliases like `alias python3=python` do not
+# apply inside `bun run` / non-interactive bash subprocesses.
+resolve_python_bin() {
+  if [[ -n "${FINDESK_PYTHON:-}" ]]; then
+    echo "${FINDESK_PYTHON}"
+    return
+  fi
+  local cand out
+  for cand in python3 python; do
+    if command -v "$cand" >/dev/null 2>&1; then
+      out="$("$cand" -c "import sys; print(sys.executable)" 2>/dev/null || true)"
+      if [[ -n "$out" && -f "$out" ]]; then
+        case "$out" in
+          *WindowsApps*) continue ;;
+        esac
+        echo "$out"
+        return
+      fi
+    fi
+  done
+  if command -v py >/dev/null 2>&1; then
+    out="$(py -3 -c "import sys; print(sys.executable)" 2>/dev/null || true)"
+    if [[ -n "$out" && -f "$out" ]]; then
+      echo "$out"
+      return
+    fi
+  fi
+  echo "error: no working Python found (tried python3/python/py -3)." >&2
+  echo "  Windows Store python3 stub exits 49 — install Python or set FINDESK_PYTHON." >&2
+  exit 1
+}
+
+PYTHON_BIN="$(resolve_python_bin)"
+
+# Native Windows Python cannot open Git Bash `/c/...` paths — convert when needed.
+to_python_path() {
+  local p="$1"
+  if command -v cygpath >/dev/null 2>&1; then
+    cygpath -w "$p"
+  else
+    echo "$p"
+  fi
+}
+
 # Bootstrap resolver used before the platform CLI is available on disk.
 _resolve_platform_via_python() {
-  python3 - "$LOCK" "$ROOT" <<'PY'
+  "$PYTHON_BIN" - "$(to_python_path "$LOCK")" "$(to_python_path "$ROOT")" <<'PY'
 import hashlib, json, os, shutil, subprocess, sys, urllib.request
 from pathlib import Path
 
@@ -181,7 +226,7 @@ resolve_platform() {
 
 DIST_ID="${FINDESK_DISTRIBUTION_ID:-}"
 if [[ -z "$DIST_ID" ]]; then
-  DIST_ID="$(python3 -c "import json; print(json.load(open('$ROOT/catalog.json'))['tenants'][0]['distributions'][0])")"
+  DIST_ID="$("$PYTHON_BIN" -c "import json,sys; print(json.load(open(sys.argv[1], encoding='utf-8'))['tenants'][0]['distributions'][0])" "$(to_python_path "$ROOT/catalog.json")")"
 fi
 
 export FINDESK_DIST_REPO="$ROOT"
@@ -203,8 +248,21 @@ _resolve_sibling_aioncore() {
     base="$(cd "$ROOT/.." && pwd)"
   fi
   local candidate="$base/findesk-core/target/release/aioncore"
-  if [[ -x "$candidate" ]]; then
-    echo "$candidate"
+  # Windows: Git Bash may treat `aioncore` as present when only `aioncore.exe`
+  # exists; Node/Electron existsSync needs the `.exe` suffix. Prefer `.exe` and
+  # emit a Windows path when cygpath is available.
+  local resolved=""
+  if [[ -f "${candidate}.exe" || -x "${candidate}.exe" ]]; then
+    resolved="${candidate}.exe"
+  elif [[ -x "$candidate" || -f "$candidate" ]]; then
+    resolved="$candidate"
+  else
+    return 0
+  fi
+  if command -v cygpath >/dev/null 2>&1; then
+    cygpath -w "$resolved"
+  else
+    echo "$resolved"
   fi
 }
 
