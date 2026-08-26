@@ -7,6 +7,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.44] - 2026-08-26
+
+### Fixed
+
+- Distro `bun run doctor` loads private plugin `toolEndpoint` declarations
+  (alias `@findesk/sdk` from the extracted SDK). FinClaw-native
+  `sessionToolDeny` names warn instead of error.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.1`
+- `finclawVersion`: `v0.12.4`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.43] - 2026-08-26
 
 ### Added
