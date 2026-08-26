@@ -7,6 +7,31 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.43] - 2026-08-26
+
+### Added
+
+- Plugin tool surface (proposal 0037): plugins declare Guid/agent tools via
+  `ctx.tools`; distros attach catalog MCP names in `agentSeed`. Public how-to:
+  `template/docs/plugin-tools.md` (EN) and `plugin-tools.zh-CN.md` (#394).
+
+### Fixed
+
+- Renderer launch-failed reload storms, HTML preview path traversal, ACP
+  relative images, and web-host LAN/upload/PREBUILDS_ONLY fixes (#396, #395,
+  #393, #392).
+
+### Changed
+
+- Keep `aioncoreVersion` at `v0.1.60-findesk-core.1`, `finclawVersion` at
+  `v0.12.4`, and `finsafeVersion` at `v0.9.37` (no core rebake this cycle).
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.1`
+- `finclawVersion`: `v0.12.4`
+- `finsafeVersion`: `v0.9.37`
+
 ## [2.1.42] - 2026-08-25
 
 ### Added

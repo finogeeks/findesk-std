@@ -36,8 +36,10 @@ bun run start
 ```
 
 Template docs live under [`template/docs/`](./template/docs/)
-([中文](./template/docs/README.zh-CN.md)), including hub URLs and
-[`telemetry`](./template/docs/telemetry.md) (Sentry / OTLP pack config).
+([中文](./template/docs/README.zh-CN.md)), including hub URLs,
+[`telemetry`](./template/docs/telemetry.md) (Sentry / OTLP pack config),
+and [`plugin-tools`](./template/docs/plugin-tools.md) (plugin MCP for Guid:
+`ctx.tools` declare vs `agentSeed` attach).
 Agent skills after scaffold: `dist-packaging`, `dist-private-plugin` (see
 `template/AGENTS.md`).
 

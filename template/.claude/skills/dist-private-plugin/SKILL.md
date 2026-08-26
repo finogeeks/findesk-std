@@ -4,13 +4,15 @@ description: |
   Author or change a private FinDesk plugin under plugins/ in a white-label
   distribution repo. Use when scaffolding @findesk-private packages, wiring
   findesk.pluginId / activateExport, enabling ids in pack/tenant.json, adding
-  an optional plugin BFF, or using host.plugins storage/files/sidecars/mcp
-  (Proposal 0022 platform privileges).
+  an optional plugin BFF, or using host.plugins storage/files/sidecars and
+  ctx.tools.provide / provideEndpoint for MCP (plugin tool surface).
+  Distro attach maps live in pack/tenant.json agentSeed — see docs/plugin-tools.md.
 ---
 
 # Private plugin (distribution repo)
 
-Read [docs/private-plugins.md](../../../docs/private-plugins.md) first.
+Read [docs/private-plugins.md](../../../docs/private-plugins.md) and
+[docs/plugin-tools.md](../../../docs/plugin-tools.md) first.
 Packaging skill: [`dist-packaging`](../dist-packaging/SKILL.md).
 
 ## Mental model
@@ -19,7 +21,8 @@ Packaging skill: [`dist-packaging`](../dist-packaging/SKILL.md).
 plugins/<name>/     →  TypeScript source (@findesk-private/*)
 pack/tenant.json    →  plugins.enable + plugins.private (ids only)
 materialize/start   →  SDK discovers FINDESK_DIST_REPO/plugins
-host.plugins.*      →  scoped storage / files / sidecars / mcp (no FinDesk PR)
+host.plugins.*      →  scoped storage / files / sidecars (no FinDesk PR)
+ctx.tools.provide / provideEndpoint → declare Guid/agent MCP (distro must attach)
 ```
 
 Do **not** put plugin source under `pack/`.
@@ -33,8 +36,9 @@ Do **not** put plugin source under `pack/`.
 - [ ] 4. If privileged local IO needed: use host.plugins.* (see below) — never ipcRenderer
 - [ ] 5. If supervised binary needed: declare findesk.sidecars[] (+ optional localArtifact)
 - [ ] 6. Add id to pack/tenant.json plugins.enable (+ private[])
-- [ ] 7. bun run materialize && bun run start (prepare fails closed if sidecar missing)
-- [ ] 8. Confirm nav/route; then bun run dist if shipping
+- [ ] 7. If Guid should see tools: agentSeed.sessionMcpAttachments (catalog MCP name, not plugin id)
+- [ ] 8. bun run materialize && bun run start (prepare fails closed if sidecar missing)
+- [ ] 9. Confirm nav/route; then bun run dist if shipping
 ```
 
 ## Naming
@@ -78,23 +82,28 @@ Use when the plugin needs:
 | Plugin-owned dirs under userData | `host.plugins.storage` |
 | Pick / import / list / open / reveal / remove files | `host.plugins.files` |
 | Supervised local binary | `host.plugins.sidecars` |
-| Guid/agent Streamable HTTP MCP | `host.plugins.mcp` |
+| Guid/agent Streamable HTTP MCP (sidecar or BFF) | `ctx.tools.provideEndpoint` |
+| In-process tools (Shape B) | `ctx.tools.provide` |
 
 **Hard rules**
 
 - Pass **this plugin’s** `pluginId` on every call; cross-plugin paths fail closed.
 - Do **not** use Electron `ipcRenderer` or request new FinDesk-main IPC for these cases.
 - Optional BFF is for domain HTTP — it does not replace storage/sidecar/mcp privileges.
-- Pin desktop SDK **≥ 2.1.27** in `findesk.lock.json` before shipping privileged plugins.
+- Pin a desktop SDK that exports `FinDeskHost.plugins` (**≥ 2.1.27**) and `ctx.tools` (plugin tool surface) before shipping privileged / MCP plugins.
 
 ```typescript
-await host.plugins.storage.ensureDir(pluginId, 'data');
-const status = await host.plugins.sidecars.ensure(pluginId, 'worker');
-await host.plugins.mcp.upsertHttp({
-  name: 'acme-reports',
-  url: `${status.baseUrl}/mcp`,
-});
+ctx.effect(() =>
+  ctx.tools.provideEndpoint({
+    sidecarId: 'worker',
+    name: 'acme-reports',
+    tools: [{ name: 'list_reports', description: 'List reports', intent: 'read' }],
+  })
+);
 ```
+
+Raw `host.plugins.mcp.upsertHttp` still exists for Guid/product-seed; **plugins should not call it**.
+Attach catalog names in `pack/tenant.json` `agentSeed` — declare ≠ Guid attach. See [docs/plugin-tools.md](../../../docs/plugin-tools.md).
 
 ### Sidecar prepare (`findesk.sidecars[]`)
 
@@ -120,6 +129,16 @@ Full examples: [docs/private-plugins.md](../../../docs/private-plugins.md) § Pl
 "plugins": {
   "enable": ["acme.reports"],
   "private": ["acme.reports"]
+}
+```
+
+Guid attach is a second opt-in (catalog MCP name, not plugin id):
+
+```json
+"agentSeed": {
+  "sessionMcpAttachments": {
+    "secretary": ["acme-reports"]
+  }
 }
 ```
 

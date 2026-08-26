@@ -107,7 +107,8 @@ export function activateMyPlugin(host: FinDeskHost): void {
 | `host.plugins.storage` | `userData/plugins/<pluginId>/…` |
 | `host.plugins.files` | 选择 / 导入 / 列表 / 打开 / 显示 / 删除 |
 | `host.plugins.sidecars` | ensure / status / stop / fetch（回环 HTTP 到你自己的 sidecar） |
-| `host.plugins.mcp` | 注册回环 Streamable HTTP MCP |
+| `ctx.tools.provideEndpoint` | 为 Guid/智能体注册 sidecar 或 BFF MCP |
+| `ctx.tools.provide` | 进程内（Shape B）工具；见 [plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md) |
 
 ### Sidecar 声明（`findesk.sidecars[]`）
 
@@ -148,23 +149,34 @@ export function activateMyPlugin(host: FinDeskHost): void {
 调用时始终用**你的** `findesk.pluginId` 限定范围。跨插件路径默认失败关闭。
 领域 HTTP 可保留可选 `backend/`；它不能替代上述特权。
 
+需要可跟踪撤销（storage + MCP）时，导出 **2.0** `FinDeskPlugin` — 不要写第二个
+`activateMyPlugin`。将 `findesk.activateExport` 设为该导出；加载器**仅**调用这一导出（可以是该 `FinDeskPlugin` 对象，或 1.0 的 `(host, boot)` 函数 — 不能两者兼有）：
+
 ```typescript
-import type { FinDeskHost } from '@findesk/sdk';
+import type { FinDeskPlugin } from '@findesk/sdk';
 import { MY_PLUGIN_ID } from './ids.js';
 
-export async function ensureMyRuntime(host: FinDeskHost): Promise<void> {
-  await host.plugins.storage.ensureDir(MY_PLUGIN_ID, 'data');
-  const status = await host.plugins.sidecars.ensure(MY_PLUGIN_ID, 'worker');
-  if (!status.ready || !status.baseUrl) {
-    throw new Error(status.lastError ?? 'sidecar not ready');
-  }
-  await host.plugins.mcp.upsertHttp({
-    name: 'my-plugin-local',
-    url: `${status.baseUrl.replace(/\/$/, '')}/mcp`,
-    description: 'My plugin local MCP',
-  });
-}
+export const myPlugin: FinDeskPlugin = {
+  name: MY_PLUGIN_ID,
+  apply(ctx) {
+    ctx.effect(async () => {
+      await ctx.host.plugins.storage.ensureDir(MY_PLUGIN_ID, 'data');
+    });
+    ctx.effect(() =>
+      ctx.tools.provideEndpoint({
+        sidecarId: 'worker',
+        name: 'my-plugin-local',
+        tools: [{ name: 'list_items', description: 'List items', intent: 'read' }],
+      })
+    );
+  },
+};
 ```
+
+原始 `host.plugins.mcp.upsertHttp` 仍为 Guid/产品种子保留；**插件不应直接调用** — 请使用 `ctx.tools.provideEndpoint`，以便 MCP 注册随插件 fiber 一并撤销。
+
+声明 MCP 不等于挂到 Guid。分发作者必须在 `pack/tenant.json` 的
+`agentSeed.sessionMcpAttachments` 中显式选择（用 `core-home` 这类目录名，不是带点的插件 id）。完整契约：[plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md)。
 
 向知识类 sidecar 导入文件后，通过回环 fetch 预热：
 

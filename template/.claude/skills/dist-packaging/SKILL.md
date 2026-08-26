@@ -56,6 +56,7 @@ artifacts. Builds are unsigned until signing secrets are added.
 - [ ] pack/tenant.json brand + configHome set
 - [ ] Optional integrations hubs validated (docs/hub-urls.md) when configured
 - [ ] Optional telemetry validated (docs/telemetry.md) when `pack/tenant.json` has `telemetry`
+- [ ] Optional Guid MCP attach maps validated (docs/plugin-tools.md) when `agentSeed.sessionMcpAttachments` is set
 - [ ] bun run doctor OK
 - [ ] bun run materialize wrote .materialized/<id>.brand.json under resolved SDK
 - [ ] Plugin sidecars prepared (resources/bundled-plugin-sidecars/<pluginId>/... under resolved SDK)

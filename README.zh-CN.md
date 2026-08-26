@@ -35,7 +35,9 @@ bun run start
 ```
 
 模板文档见 [`template/docs/`](./template/docs/)（[中文索引](./template/docs/README.zh-CN.md)），
-含 Hub URL 与 [`telemetry`](./template/docs/telemetry.zh-CN.md)（Sentry / OTLP pack 配置）。
+含 Hub URL、[`telemetry`](./template/docs/telemetry.zh-CN.md)（Sentry / OTLP pack 配置），
+以及 [`plugin-tools`](./template/docs/plugin-tools.zh-CN.md)（插件 MCP：`ctx.tools` 声明 vs
+`agentSeed` 挂载）。
 脚手架后的 Agent 技能：`dist-packaging`、`dist-private-plugin`（见 `template/AGENTS.md`）。
 
 持有私有 checkout 的 FinDesk 工程师可使用等价命令：

@@ -105,7 +105,8 @@ When the plugin needs local files, a supervised binary, or Guid/agent MCP — us
 | `host.plugins.storage` | `userData/plugins/<pluginId>/…` |
 | `host.plugins.files` | Pick / import / list / open / reveal / remove |
 | `host.plugins.sidecars` | Ensure / status / stop / fetch (loopback HTTP to your own sidecar) |
-| `host.plugins.mcp` | Upsert loopback Streamable HTTP MCP |
+| `ctx.tools.provideEndpoint` | Register sidecar or BFF MCP for Guid/agents |
+| `ctx.tools.provide` | In-process (Shape B) tools; see [plugin-tools.md](./plugin-tools.md) |
 
 ### Sidecar declaration (`findesk.sidecars[]`)
 
@@ -146,23 +147,36 @@ end. Use your own MCP name + pack `agentSeed` — do not depend on removed first
 Always scope calls with **your** `findesk.pluginId`. Cross-plugin paths fail closed.
 Keep optional `backend/` for domain HTTP; it does not replace these privileges.
 
+For tracked teardown (storage + MCP), export a **2.0** `FinDeskPlugin` — not a second
+`activateMyPlugin`. Set `findesk.activateExport` to that export; the loader invokes **only**
+that single export (either this `FinDeskPlugin` object or a 1.0 `(host, boot)` function — not both):
+
 ```typescript
-import type { FinDeskHost } from '@findesk/sdk';
+import type { FinDeskPlugin } from '@findesk/sdk';
 import { MY_PLUGIN_ID } from './ids.js';
 
-export async function ensureMyRuntime(host: FinDeskHost): Promise<void> {
-  await host.plugins.storage.ensureDir(MY_PLUGIN_ID, 'data');
-  const status = await host.plugins.sidecars.ensure(MY_PLUGIN_ID, 'worker');
-  if (!status.ready || !status.baseUrl) {
-    throw new Error(status.lastError ?? 'sidecar not ready');
-  }
-  await host.plugins.mcp.upsertHttp({
-    name: 'my-plugin-local',
-    url: `${status.baseUrl.replace(/\/$/, '')}/mcp`,
-    description: 'My plugin local MCP',
-  });
-}
+export const myPlugin: FinDeskPlugin = {
+  name: MY_PLUGIN_ID,
+  apply(ctx) {
+    ctx.effect(async () => {
+      await ctx.host.plugins.storage.ensureDir(MY_PLUGIN_ID, 'data');
+    });
+    ctx.effect(() =>
+      ctx.tools.provideEndpoint({
+        sidecarId: 'worker',
+        name: 'my-plugin-local',
+        tools: [{ name: 'list_items', description: 'List items', intent: 'read' }],
+      })
+    );
+  },
+};
 ```
+
+Raw `host.plugins.mcp.upsertHttp` still exists for Guid/product-seed paths; **plugins should not call it** — use `ctx.tools.provideEndpoint` so MCP registration withdraws with the plugin fiber.
+
+Declaring MCP is not the same as attaching it to Guid. Distro authors must opt in via
+`pack/tenant.json` `agentSeed.sessionMcpAttachments` (catalog names such as
+`core-home`, not dotted plugin ids). Full contract: [plugin-tools.md](./plugin-tools.md).
 
 After importing files into a knowledge-style sidecar, warm via loopback fetch:
 

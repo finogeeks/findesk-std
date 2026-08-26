@@ -14,6 +14,7 @@
 | [packaging.zh-CN.md](./packaging.zh-CN.md) | Materialize + 安装包构建 |
 | [update-feed.zh-CN.md](./update-feed.zh-CN.md) | 在线升级源与发布适配器 |
 | [private-plugins.zh-CN.md](./private-plugins.zh-CN.md) | `plugins/` 下的私有插件 |
+| [plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md) | 插件 MCP：声明（`ctx.tools`）与挂载（`agentSeed`） |
 | [local-paths.zh-CN.md](./local-paths.zh-CN.md) | 缓存、应用包与运行时数据路径 |
 | [upstream-sdk.zh-CN.md](./upstream-sdk.zh-CN.md) | 每日 findesk-std 监视 → 升版 Issue |
 
