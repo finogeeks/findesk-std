@@ -7,6 +7,25 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.47] - 2026-09-01
+
+### Fixed
+
+- Copilot session MCP attach and per-surface conversations so plugin BFF
+  tools reach the model.
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.60-findesk-core.6`.
+- Pin `finclawVersion` → `v0.12.7`. FinSAFE stays `v0.9.37`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.6`
+- `finclawVersion`: `v0.12.7`
+- `finsafeVersion`: `v0.9.37`
+- `officecliVersion`: `v1.0.145`
+
 ## [2.1.46] - 2026-09-01
 
 ### Added
