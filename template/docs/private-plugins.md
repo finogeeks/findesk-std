@@ -1,7 +1,13 @@
 # Private plugins
 
+[中文](./private-plugins.zh-CN.md)
+
 Customer-owned plugin **source** lives in this distribution repo under `plugins/`.
 The tenant pack (`pack/tenant.json`) only lists **ids / pins** — it does not embed TypeScript.
+
+Overview: [plugin-system.md](./plugin-system.md). Step-by-step:
+[plugin-developer-guide.md](./plugin-developer-guide.md). MCP declare vs attach:
+[plugin-tools.md](./plugin-tools.md).
 
 ## Layout
 

@@ -37,7 +37,10 @@ bun run dist -- --mac --arm64          # full installer (or --pack-only for smok
 | [docs/getting-started.md](docs/getting-started.md) | Lock pin, doctor, first run |
 | [docs/packaging.md](docs/packaging.md) | `materialize` / `dist`, signing, installers |
 | [docs/update-feed.md](docs/update-feed.md) | Online update origin + publish adapters |
+| [docs/plugin-system.md](docs/plugin-system.md) ([中文](docs/plugin-system.zh-CN.md)) | Plugin layers (L1/L2/L3), runtime 2.0 |
+| [docs/plugin-developer-guide.md](docs/plugin-developer-guide.md) ([中文](docs/plugin-developer-guide.zh-CN.md)) | Step-by-step private plugin walkthrough |
 | [docs/private-plugins.md](docs/private-plugins.md) | Author private plugins under `plugins/` |
+| [docs/plugin-tools.md](docs/plugin-tools.md) | Plugin MCP for Guid: `ctx.tools` declare vs `agentSeed` attach |
 | [docs/local-paths.md](docs/local-paths.md) | Where SDK cache, app, and user data land |
 | [docs/upstream-sdk.md](docs/upstream-sdk.md) | Daily findesk-std watch → upgrade issues |
 

@@ -13,6 +13,8 @@
 | [telemetry.zh-CN.md](./telemetry.zh-CN.md) | Pack Sentry / OTLP DSN、同意与 staging 冒烟 |
 | [packaging.zh-CN.md](./packaging.zh-CN.md) | Materialize + 安装包构建 |
 | [update-feed.zh-CN.md](./update-feed.zh-CN.md) | 在线升级源与发布适配器 |
+| [plugin-system.zh-CN.md](./plugin-system.zh-CN.md) | 插件分层（L1/L2/L3）、运行时 2.0、MCP 作为可选贡献 |
+| [plugin-developer-guide.zh-CN.md](./plugin-developer-guide.zh-CN.md) | 逐步：脚手架 → UI → BFF → sidecar → MCP → doctor |
 | [private-plugins.zh-CN.md](./private-plugins.zh-CN.md) | `plugins/` 下的私有插件 |
 | [plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md) | 插件 MCP：声明（`ctx.tools`）与挂载（`agentSeed`） |
 | [local-paths.zh-CN.md](./local-paths.zh-CN.md) | 缓存、应用包与运行时数据路径 |

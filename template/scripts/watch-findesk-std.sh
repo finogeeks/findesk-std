@@ -153,8 +153,13 @@ This distribution treats **findesk-std** as upstream. Bump when ready — do not
 2. Update \`findesk.lock.json\` (\`findesk.version\`, \`artifact\`, \`integrity\`; refresh \`findeskCore.version\` note if present).
 3. Offline dual-delivery: download the tarball into \`artifacts/\` (gitignored) when using a relative \`artifact\` path.
 4. Clear stale cache if needed: \`rm -rf ~/.cache/findesk/platforms/${PINNED}\`
-5. \`bun run doctor && bun run materialize\`
-6. Smoke / \`bun run dist\` as usual for this SKU.
+5. Harvest public template docs if they changed: compare
+   https://github.com/${UPSTREAM_REPO}/tree/main/template/docs
+   (and \`template/.claude/skills/\`, \`template/AGENTS.md\`) with this repo.
+   Copy new/changed plugin how-tos such as \`docs/plugin-tools.md\`.
+   Do **not** overwrite distro-only docs.
+6. \`bun run doctor && bun run materialize\`
+7. Smoke / \`bun run dist\` as usual for this SKU.
 
 ### Notes
 

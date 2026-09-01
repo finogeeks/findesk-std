@@ -26,8 +26,12 @@ findesk-std releases needs no extra secret.
 
 ## After an issue opens
 
-Follow the issue checklist (lock snippet → `findesk.lock.json` → doctor →
-materialize → dist). Skills: [`dist-packaging`](../.claude/skills/dist-packaging/SKILL.md).
+Follow the issue checklist (lock snippet → `findesk.lock.json` → harvest
+`template/docs/` + skills if they changed → doctor → materialize → dist).
+The SDK tarball does **not** include distro how-tos; copy them from
+[`finogeeks/findesk-std` `template/`](https://github.com/finogeeks/findesk-std/tree/main/template)
+when the release notes mention new docs. Do not overwrite distro-only pages.
+Skills: [`dist-packaging`](../.claude/skills/dist-packaging/SKILL.md).
 
 ## Disable
 

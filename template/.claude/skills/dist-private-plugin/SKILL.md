@@ -11,7 +11,9 @@ description: |
 
 # Private plugin (distribution repo)
 
-Read [docs/private-plugins.md](../../../docs/private-plugins.md) and
+Read [docs/plugin-system.md](../../../docs/plugin-system.md),
+[docs/plugin-developer-guide.md](../../../docs/plugin-developer-guide.md),
+[docs/private-plugins.md](../../../docs/private-plugins.md), and
 [docs/plugin-tools.md](../../../docs/plugin-tools.md) first.
 Packaging skill: [`dist-packaging`](../dist-packaging/SKILL.md).
 

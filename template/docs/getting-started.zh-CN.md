@@ -70,4 +70,4 @@ bun run start         # 本分发的 Electron 开发启动
 | `FINDESK_DISTRIBUTION_ID` | 覆盖分发 id（默认来自 `catalog.json`） |
 | `AIONCORE_PREFER_LOCAL` | 客户侧保持 `0` / 未设置 |
 
-下一步：[hub-urls.zh-CN.md](./hub-urls.zh-CN.md) · [packaging.zh-CN.md](./packaging.zh-CN.md) · [private-plugins.zh-CN.md](./private-plugins.zh-CN.md) · [plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md)。
+下一步：[hub-urls.zh-CN.md](./hub-urls.zh-CN.md) · [packaging.zh-CN.md](./packaging.zh-CN.md) · [plugin-system.zh-CN.md](./plugin-system.zh-CN.md) · [plugin-developer-guide.zh-CN.md](./plugin-developer-guide.zh-CN.md) · [private-plugins.zh-CN.md](./private-plugins.zh-CN.md) · [plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md)。

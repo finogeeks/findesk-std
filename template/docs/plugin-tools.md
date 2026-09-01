@@ -7,7 +7,9 @@ to Guid / Copilot sessions. Requires a desktop SDK that exports `ctx.tools`
 (`provide` / `provideEndpoint`). Pin that SDK in `findesk.lock.json` (see the
 SDK CHANGELOG for the first release that includes this surface).
 
-Related: [private-plugins.md](./private-plugins.md) (plugin layout),
+Related: [plugin-system.md](./plugin-system.md) (layers + runtime 2.0),
+[plugin-developer-guide.md](./plugin-developer-guide.md) (author walkthrough),
+[private-plugins.md](./private-plugins.md) (plugin layout),
 [getting-started.md](./getting-started.md) (pin + doctor).
 
 ## Two jobs, one default: off

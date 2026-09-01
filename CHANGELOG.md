@@ -7,6 +7,33 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.46] - 2026-09-01
+
+### Added
+
+- Sidecar `injectHostLlm: "optional"` for capture/authoring processes.
+- Plugin `host.conversation.start` / `followUp` without opening chat.
+
+### Fixed
+
+- Optional-LLM sidecar JWT projection; skills install on hired instances.
+- Guid ACP first-turn model gate; office preview when file-watch is down.
+
+### Changed
+
+- Template lock-bump checklist harvests `template/docs/` + skills into
+  existing distros. Root README lists `docs/plugin-tools.md`.
+- Template adds plugin-system overview and developer guide (EN+ZH).
+- Pin `aioncoreVersion` → `v0.1.60-findesk-core.4`.
+- Pin `finclawVersion` → `v0.12.6`. FinSAFE stays `v0.9.37`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.4`
+- `finclawVersion`: `v0.12.6`
+- `finsafeVersion`: `v0.9.37`
+- `officecliVersion`: `v1.0.145`
+
 ## [2.1.45] - 2026-08-26
 
 ### Added

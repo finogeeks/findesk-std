@@ -35,4 +35,6 @@ Cursor resolves the same files via [`.cursor/skills`](.cursor/skills) (symlink).
 Start at [README.md](README.md) → [docs/getting-started.md](docs/getting-started.md) →
 [docs/hub-urls.md](docs/hub-urls.md) (optional hubs) →
 [docs/telemetry.md](docs/telemetry.md) (optional Sentry / OTLP) →
+[docs/plugin-system.md](docs/plugin-system.md) (layers + runtime 2.0) →
+[docs/plugin-developer-guide.md](docs/plugin-developer-guide.md) (author walkthrough) →
 [docs/plugin-tools.md](docs/plugin-tools.md) (plugin MCP / Guid attach).

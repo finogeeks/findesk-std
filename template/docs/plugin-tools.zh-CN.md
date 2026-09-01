@@ -6,7 +6,9 @@
 会话。需要桌面 SDK 导出 `ctx.tools`（`provide` / `provideEndpoint`）。在
 `findesk.lock.json` 中固定该 SDK（以 SDK CHANGELOG 中首次包含该表面的版本为准）。
 
-相关：[private-plugins.zh-CN.md](./private-plugins.zh-CN.md)（插件布局）、
+相关：[plugin-system.zh-CN.md](./plugin-system.zh-CN.md)（分层与运行时 2.0）、
+[plugin-developer-guide.zh-CN.md](./plugin-developer-guide.zh-CN.md)（编写指南）、
+[private-plugins.zh-CN.md](./private-plugins.zh-CN.md)（插件布局）、
 [getting-started.zh-CN.md](./getting-started.zh-CN.md)（固定版本与 doctor）。
 
 ## 两件事，默认关闭

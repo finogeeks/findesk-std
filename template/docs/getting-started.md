@@ -68,4 +68,4 @@ Scripts export `FINDESK_DIST_REPO` (this repo) and `FINDESK_WHITE_LABEL=1`.
 | `FINDESK_DISTRIBUTION_ID` | Override distribution id (default from `catalog.json`) |
 | `AIONCORE_PREFER_LOCAL` | Leave `0` / unset for customers |
 
-Next: [hub-urls.md](./hub-urls.md) · [packaging.md](./packaging.md) · [private-plugins.md](./private-plugins.md) · [plugin-tools.md](./plugin-tools.md).
+Next: [hub-urls.md](./hub-urls.md) · [packaging.md](./packaging.md) · [plugin-system.md](./plugin-system.md) · [plugin-developer-guide.md](./plugin-developer-guide.md) · [private-plugins.md](./private-plugins.md) · [plugin-tools.md](./plugin-tools.md).

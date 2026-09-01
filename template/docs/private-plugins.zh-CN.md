@@ -5,6 +5,10 @@
 客户自有插件**源码**位于本分发仓库的 `plugins/`。
 tenant pack（`pack/tenant.json`）只列出 **id / pin** — 不嵌入 TypeScript。
 
+总览：[plugin-system.zh-CN.md](./plugin-system.zh-CN.md)。逐步指南：
+[plugin-developer-guide.zh-CN.md](./plugin-developer-guide.zh-CN.md)。MCP 声明 vs 挂载：
+[plugin-tools.zh-CN.md](./plugin-tools.zh-CN.md)。
+
 ## 布局
 
 ```text

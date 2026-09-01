@@ -27,8 +27,12 @@
 
 ## Issue 打开之后
 
-按 Issue 清单执行（lock snippet → `findesk.lock.json` → doctor →
-materialize → dist）。技能：[`dist-packaging`](../.claude/skills/dist-packaging/SKILL.md)。
+按 Issue 清单执行（lock snippet → `findesk.lock.json` → 若有变更则同步
+`template/docs/` 与 skills → doctor → materialize → dist）。
+SDK tarball **不含** 分发仓 how-to；发行说明提到新文档时，从
+[`finogeeks/findesk-std` `template/`](https://github.com/finogeeks/findesk-std/tree/main/template)
+拷贝。不要覆盖本仓独有页面。
+技能：[`dist-packaging`](../.claude/skills/dist-packaging/SKILL.md)。
 
 ## 禁用
 
