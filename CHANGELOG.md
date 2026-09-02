@@ -7,6 +7,29 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.48] - 2026-09-02
+
+### Added
+
+- Forward host `AIONCORE_FINCLAW_LAZY` into aioncore; packaged app does not
+  set it.
+
+### Fixed
+
+- Label Excel chart values and keep sheet tabs visible.
+
+### Changed
+
+- Pin `aioncoreVersion` → `v0.1.60-findesk-core.7`.
+- Pin `finclawVersion` → `v0.12.8`. FinSAFE stays `v0.9.37`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.7`
+- `finclawVersion`: `v0.12.8`
+- `finsafeVersion`: `v0.9.37`
+- `officecliVersion`: `v1.0.145`
+
 ## [2.1.47] - 2026-09-01
 
 ### Fixed
