@@ -7,6 +7,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match
 
 ## [Unreleased]
 
+## [2.1.49] - 2026-09-02
+
+### Changed
+
+- Product default: `AIONCORE_FINCLAW_LAZY=1` (`finclaw serve --lazy`).
+  Set `AIONCORE_FINCLAW_LAZY=0` for eager serve.
+- Pin `finsafeVersion` → `v0.9.41`. Keep `aioncoreVersion` at
+  `v0.1.60-findesk-core.7`.
+
+### Bundled components
+
+- `aioncoreVersion`: `v0.1.60-findesk-core.7`
+- `finclawVersion`: `v0.12.8`
+- `finsafeVersion`: `v0.9.41`
+- `officecliVersion`: `v1.0.145`
+
 ## [2.1.48] - 2026-09-02
 
 ### Added
